@@ -25,3 +25,9 @@ antigen apply
 # Shell shortcuts to move cursor
 bindkey "^[b" backward-word
 bindkey "^[f" forward-word
+
+# kubectl
+if [ $commands[kubectl] ]; then
+  alias k=kubectl
+  source <(kubectl completion zsh)
+fi
