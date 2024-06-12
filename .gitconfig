@@ -1,0 +1,20 @@
+[user]
+    name = "beandrad"
+    email = "beandrad@microsoft.com"
+
+[core]
+	pager = less -+F
+    excludesfile = "~/.home/.gitignore"
+    editor = "vim"
+
+[format]
+    pretty=format:"%C(auto)%h %Cgreen%cd %C(auto)%d %C(Cyan)<%aE> %Creset%s"
+
+[log]
+    date=format:%Y-%m-%dT%H:%M:%S%z
+
+[pager]
+    branch=false
+
+[pull]
+	rebase = true
