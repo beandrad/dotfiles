@@ -21,3 +21,7 @@ antigen apply
  
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
+
+# Shell shortcuts to move cursor
+bindkey "^[b" backward-word
+bindkey "^[f" forward-word
