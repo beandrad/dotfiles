@@ -4,8 +4,8 @@
 
 [core]
 	pager = less -+F
-    excludesfile = "~/.home/.gitignore"
-    editor = "vim"
+  excludesfile = "~/dotfiles/.gitignore"
+  editor = "vim"
 
 [format]
     pretty=format:"%C(auto)%h %Cgreen%cd %C(auto)%d %C(Cyan)<%aE> %Creset%s"
