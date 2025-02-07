@@ -1,5 +1,7 @@
 #!/bin/bash
 
+apt-get update && apt-get -y install zsh curl vim less
+
 curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
 
 mkdir -p ~/.fonts
