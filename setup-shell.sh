@@ -1,3 +1,5 @@
+#!/bin/bash
+
 curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
 
 mkdir -p ~/.fonts
