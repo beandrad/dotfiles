@@ -1,6 +1,7 @@
 #!/bin/bash
 
-sudo apt-get update && apt-get -y install zsh curl vim less
+# sudo apt-get update && apt-get -y install zsh curl vim less
+sudo apt-get -y install zsh curl vim less
 
 curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
 
