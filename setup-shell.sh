@@ -11,5 +11,7 @@ curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%
 curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf --output ~/.fonts/'MesloLGS NF Italic.ttf'
 curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf --output ~/.fonts/'MesloLGS NF Bold Italic.ttf'
 
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/dotfiles/themes/powerlevel10k
+
 cp -rf  $HOME/dotfiles/.vimrc $HOME/.vimrc
 echo "ZDOTDIR=$HOME/dotfiles" > $HOME/.zshenv

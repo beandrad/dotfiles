@@ -6,6 +6,8 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
  
 typeset -a ANTIGEN_CHECK_FILES=(${ZDOTDIR:-~}/.zshrc)
+
+source ~/dotfiles/themes/powerlevel10k/powerlevel10k.zsh-theme
  
 source $ZDOTDIR/antigen.zsh
  
@@ -15,7 +17,7 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle bossjones/boss-git-zsh-plugin
 antigen bundle agkozak/zsh-z
-antigen theme romkatv/powerlevel10k
+# antigen theme romkatv/powerlevel10k
 
 antigen apply
  
