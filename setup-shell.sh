@@ -3,7 +3,8 @@
 # sudo apt-get update && apt-get -y install zsh curl vim less
 sudo apt-get -y install zsh curl vim less
 
-curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
+# so that downloading the file is not blocked
+# curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
 
 mkdir -p ~/.fonts
 curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf --output ~/.fonts/'MesloLGS NF Regular.ttf'
