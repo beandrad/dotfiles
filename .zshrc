@@ -29,8 +29,8 @@ bindkey "^[b" backward-word
 bindkey "^[f" forward-word
 
 # Shell shortcuts to move cursor in WSL
-bindkey ";4D" backward-word
-bindkey ";4C" forward-word
+bindkey ";5D" backward-word
+bindkey ";5C" forward-word
 
 # kubectl
 if [ $commands[kubectl] ]; then
