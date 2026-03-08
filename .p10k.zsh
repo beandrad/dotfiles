@@ -112,7 +112,11 @@
   )
 
   # Defines character set used by powerlevel10k. It's best to let `p10k configure` set it for you.
-  typeset -g POWERLEVEL9K_MODE=ascii
+  if [[ -f "$HOME/Library/Fonts/MesloLGS NF Regular.ttf" || -f "$HOME/.fonts/MesloLGS NF Regular.ttf" ]]; then
+    typeset -g POWERLEVEL9K_MODE=nerdfont-complete
+  else
+    typeset -g POWERLEVEL9K_MODE=ascii
+  fi
   # When set to `moderate`, some icons will have an extra space after them. This is meant to avoid
   # icon overlap when using non-monospace fonts. When set to `none`, spaces are not added.
   typeset -g POWERLEVEL9K_ICON_PADDING=none

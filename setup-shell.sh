@@ -1,18 +1,35 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# sudo apt-get update && apt-get -y install zsh curl vim less
-sudo apt-get -y install zsh curl vim less
+set -euo pipefail
 
-# so that downloading the file is not blocked
-# curl -L git.io/antigen > $HOME/dotfiles/antigen.zsh
+DOTFILES_DIR="${HOME}/dotfiles"
 
-mkdir -p ~/.fonts
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf --output ~/.fonts/'MesloLGS NF Regular.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf --output ~/.fonts/'MesloLGS NF Bold.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf --output ~/.fonts/'MesloLGS NF Italic.ttf'
-curl -L https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf --output ~/.fonts/'MesloLGS NF Bold Italic.ttf'
+if [[ "${OSTYPE}" == darwin* ]]; then
+	FONT_DIR="${HOME}/Library/Fonts"
+elif command -v apt-get >/dev/null 2>&1; then
+	sudo apt-get -y install zsh curl vim less
+	FONT_DIR="${HOME}/.fonts"
+else
+	FONT_DIR="${HOME}/.fonts"
+fi
 
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/dotfiles/themes/powerlevel10k
+mkdir -p "${FONT_DIR}"
 
-cp -rf  $HOME/dotfiles/.vimrc $HOME/.vimrc
-echo "ZDOTDIR=$HOME/dotfiles" > $HOME/.zshenv
+install_font() {
+	local file_name="$1"
+	local font_url="$2"
+	curl -fsSL "${font_url}" --output "${FONT_DIR}/${file_name}"
+}
+
+install_font "MesloLGS NF Regular.ttf" "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf"
+install_font "MesloLGS NF Bold.ttf" "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf"
+install_font "MesloLGS NF Italic.ttf" "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf"
+install_font "MesloLGS NF Bold Italic.ttf" "https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf"
+
+cp -rf "${DOTFILES_DIR}/.vimrc" "${HOME}/.vimrc"
+echo "ZDOTDIR=${DOTFILES_DIR}" > "${HOME}/.zshenv"
+
+if [[ "${OSTYPE}" == darwin* ]]; then
+	echo "Fonts installed to ${FONT_DIR}."
+	echo "In iTerm2, set your profile font to MesloLGS NF for proper symbols/icons."
+fi

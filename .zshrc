@@ -19,7 +19,6 @@ antigen bundle agkozak/zsh-z
 # antigen theme romkatv/powerlevel10k
 
 antigen apply
-source ~/dotfiles/themes/powerlevel10k/powerlevel10k.zsh-theme
  
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
@@ -33,10 +32,10 @@ bindkey ";5D" backward-word
 bindkey ";5C" forward-word
 
 # kubectl
-if [ $commands[kubectl] ]; then
-  alias k=kubectl
-  source <(kubectl completion zsh)
-fi
+# if [ $commands[kubectl] ]; then
+#   alias k=kubectl
+#   source <(kubectl completion zsh)
+# fi
 
 # History
 HISTFILE="$HOME/.zsh_history"
