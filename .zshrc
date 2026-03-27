@@ -16,7 +16,7 @@ antigen bundle zsh-users/zsh-history-substring-search
 antigen bundle zdharma-continuum/fast-syntax-highlighting
 antigen bundle bossjones/boss-git-zsh-plugin
 antigen bundle agkozak/zsh-z
-# antigen theme romkatv/powerlevel10k
+antigen theme romkatv/powerlevel10k
 
 antigen apply
  

@@ -3,6 +3,8 @@
 set -euo pipefail
 
 DOTFILES_DIR="${HOME}/dotfiles"
+ZSHRC_BOOTSTRAP_BEGIN="# >>> dotfiles-zsh-bootstrap >>>"
+ZSHRC_BOOTSTRAP_END="# <<< dotfiles-zsh-bootstrap <<<"
 
 if [[ "${OSTYPE}" == darwin* ]]; then
 	FONT_DIR="${HOME}/Library/Fonts"
@@ -28,6 +30,18 @@ install_font "MesloLGS NF Bold Italic.ttf" "https://github.com/romkatv/powerleve
 
 cp -rf "${DOTFILES_DIR}/.vimrc" "${HOME}/.vimrc"
 echo "ZDOTDIR=${DOTFILES_DIR}" > "${HOME}/.zshenv"
+
+zshrc_path="${HOME}/.zshrc"
+touch "${zshrc_path}"
+
+if ! grep -Fq "${ZSHRC_BOOTSTRAP_BEGIN}" "${zshrc_path}"; then
+	{
+		echo ""
+		echo "${ZSHRC_BOOTSTRAP_BEGIN}"
+		echo "[[ -f \"${DOTFILES_DIR}/.zshrc\" ]] && source \"${DOTFILES_DIR}/.zshrc\""
+		echo "${ZSHRC_BOOTSTRAP_END}"
+	} >> "${zshrc_path}"
+fi
 
 if [[ "${OSTYPE}" == darwin* ]]; then
 	echo "Fonts installed to ${FONT_DIR}."
