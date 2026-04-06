@@ -47,3 +47,7 @@ setopt hist_ignore_dups
 setopt hist_ignore_space
 setopt inc_append_history
 setopt share_history
+
+copilotwt() {
+  "${ZDOTDIR:-$HOME/dotfiles}/copilot-worktree.sh" "$@"
+}
