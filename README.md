@@ -18,7 +18,8 @@ In devcontainers that pre-create `~/.zshrc`, running the setup script appends an
 ## Copilot worktree wrapper
 
 Run Copilot in a disposable worktree and have any resulting changes committed to
-the branch automatically:
+the branch automatically. If the repo root has a `.env`, it is copied into the
+new worktree before Copilot starts:
 
 ```bash
 ~/dotfiles/copilot-worktree.sh feat/my-change -- --prompt "implement the change"

@@ -91,6 +91,7 @@ repo_root="$(git rev-parse --show-toplevel 2>/dev/null)" || {
 }
 
 repo_name="$(basename "${repo_root}")"
+root_env_file="${repo_root}/.env"
 
 if [[ -z "${worktree_dir}" ]]; then
 	safe_branch_name="${branch_name//\//-}"
@@ -113,6 +114,10 @@ if git -C "${repo_root}" show-ref --verify --quiet "refs/heads/${branch_name}"; 
 	git -C "${repo_root}" worktree add "${worktree_dir}" "${branch_name}"
 else
 	git -C "${repo_root}" worktree add -b "${branch_name}" "${worktree_dir}" "${base_ref}"
+fi
+
+if [[ -f "${root_env_file}" && ! -e "${worktree_dir}/.env" ]]; then
+	cp -p "${root_env_file}" "${worktree_dir}/.env"
 fi
 
 echo "Starting Copilot in ${worktree_dir}"
