@@ -10,6 +10,15 @@ Run:
 
 In devcontainers that pre-create `~/.zshrc`, running the setup script appends an idempotent bootstrap block so `~/dotfiles/.zshrc` is still sourced.
 
+## WSL / no-sudo environments
+
+When `sudo` is unavailable the setup script automatically:
+
+1. Builds **ncurses** and **zsh from source** into `~/.local` (requires `gcc`, `make`, and `curl`).
+2. Warns about any other missing tools (`vim`, `less`).
+3. Adds `~/.local/bin` to `PATH` via `~/.zshenv`.
+4. Attempts `chsh`; if that fails it prints a one-liner to add to `~/.bashrc` so zsh launches automatically.
+
 ## macOS notes
 
 - `setup-shell.sh` installs Meslo Nerd Font files into `~/Library/Fonts`.
@@ -42,24 +51,8 @@ By default the worktree is created as a **sibling** of the repo:
 ### Devcontainer usage
 
 The worktree uses relative git paths, so both the repo and the worktree must be
-mounted into the devcontainer. The simplest way is to mount the **parent
-directory** that contains both. Add this to your **user-level** devcontainer
-settings (`~/.devcontainer.json` or VS Code user `settings.json`) so it doesn't
-touch the project's own `devcontainer.json`:
-
-```jsonc
-// In VS Code: Settings → search "dev.containers.defaultFeatures"
-// Or in ~/.config/Code/User/settings.json:
-{
-  "dev.containers.mountSources": "parentFolder"
-}
-```
-
-This mounts the parent of your repo as `/workspaces`, giving the container
-access to both directories while preserving the relative paths between them.
-
-Alternatively, to limit the scope to a single project, add a workspace mount to
-`.devcontainer/devcontainer.json`:
+mounted into the devcontainer. Mount the **parent directory** that contains both
+by adding a workspace mount to `.devcontainer/devcontainer.json`:
 
 ```jsonc
 {
@@ -67,3 +60,6 @@ Alternatively, to limit the scope to a single project, add a workspace mount to
   "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}"
 }
 ```
+
+This mounts the parent of your repo as `/workspaces`, giving the container
+access to both directories while preserving the relative paths between them.
