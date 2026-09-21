@@ -48,6 +48,18 @@ setopt hist_ignore_space
 setopt inc_append_history
 setopt share_history
 
-copilotwt() {
-  "${ZDOTDIR:-$HOME/dotfiles}/copilot-worktree.sh" "$@"
+git-pull-local() {
+  if (( $# != 1 )); then
+    echo "Usage: git-pull-local <tracked-file>" >&2
+    return 2
+  fi
+
+  local file="$1"
+
+  git update-index --no-skip-worktree -- "$file" || return
+  git pull --rebase --autostash
+  local status=$?
+
+  git update-index --skip-worktree -- "$file" || return 1
+  return $status
 }
