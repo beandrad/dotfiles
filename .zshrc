@@ -63,3 +63,6 @@ git-pull-local() {
   git update-index --skip-worktree -- "$file" || return 1
   return $status
 }
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
