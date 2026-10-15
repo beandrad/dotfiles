@@ -129,3 +129,5 @@ if [[ -n "${zsh_path}" ]]; then
 		echo "  if [ -x \"${zsh_path}\" ]; then exec \"${zsh_path}\" -l; fi"
 	fi
 fi
+
+npx skills@latest add -y mattpocock/skills
