@@ -134,4 +134,4 @@ if [[ -n "${zsh_path}" ]]; then
 	fi
 fi
 
-npx skills@latest add -y mattpocock/skills -g
+# npx skills@latest add -y mattpocock/skills -g
