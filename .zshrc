@@ -6,22 +6,20 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
  
 typeset -a ANTIGEN_CHECK_FILES=(${ZDOTDIR:-~}/.zshrc)
-
  
+source "$ZDOTDIR/antigen.zsh" || return
+
+antigen bundle zsh-users/zsh-autosuggestions
+antigen bundle zsh-users/zsh-completions
+antigen bundle zsh-users/zsh-history-substring-search
+antigen bundle zdharma-continuum/fast-syntax-highlighting
+antigen bundle bossjones/boss-git-zsh-plugin
+antigen bundle agkozak/zsh-z
 if (( ! ${+_DOTFILES_ANTIGEN_INITIALIZED} )); then
-  source "$ZDOTDIR/antigen.zsh" || return
-
-  antigen bundle zsh-users/zsh-autosuggestions
-  antigen bundle zsh-users/zsh-completions
-  antigen bundle zsh-users/zsh-history-substring-search
-  antigen bundle zdharma-continuum/fast-syntax-highlighting
-  antigen bundle bossjones/boss-git-zsh-plugin
-  antigen bundle agkozak/zsh-z
   antigen theme romkatv/powerlevel10k
-
-  antigen apply || return
   typeset -g _DOTFILES_ANTIGEN_INITIALIZED=1
 fi
+antigen apply || return
  
 # To customize prompt, run `p10k configure` or edit ~/dotfiles/.p10k.zsh.
 [[ ! -f ~/dotfiles/.p10k.zsh ]] || source ~/dotfiles/.p10k.zsh
