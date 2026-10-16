@@ -67,7 +67,7 @@ install_zsh_from_source() {
 if [[ "${OSTYPE}" == darwin* ]]; then
 	FONT_DIR="${HOME}/Library/Fonts"
 elif command -v apt-get >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
-	sudo apt-get -y install zsh curl vim less
+	sudo apt-get update && sudo apt-get install -y zsh curl vim less
 	FONT_DIR="${HOME}/.fonts"
 else
 	FONT_DIR="${HOME}/.fonts"
