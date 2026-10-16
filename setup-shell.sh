@@ -67,7 +67,7 @@ install_zsh_from_source() {
 if [[ "${OSTYPE}" == darwin* ]]; then
 	FONT_DIR="${HOME}/Library/Fonts"
 elif command -v apt-get >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
-	sudo apt-get update && sudo apt-get install -y zsh curl vim less
+	sudo apt-get update && sudo apt-get install -y zsh curl vim less passwd
 	FONT_DIR="${HOME}/.fonts"
 else
 	FONT_DIR="${HOME}/.fonts"
@@ -122,7 +122,11 @@ fi
 
 zsh_path="$(command -v zsh 2>/dev/null || true)"
 if [[ -n "${zsh_path}" ]]; then
-	if ! chsh -s "${zsh_path}" 2>/dev/null; then
+	chsh_command=(chsh -s "${zsh_path}")
+	if [[ "${OSTYPE}" == linux* ]] && sudo -n true 2>/dev/null; then
+		chsh_command=(sudo -n chsh -s "${zsh_path}" "$(id -un)")
+	fi
+	if ! "${chsh_command[@]}"; then
 		echo ""
 		echo "Could not change default shell (chsh failed or unavailable)."
 		echo "Add this to your ~/.bashrc to auto-launch zsh:"
@@ -130,4 +134,4 @@ if [[ -n "${zsh_path}" ]]; then
 	fi
 fi
 
-npx skills@latest add -y mattpocock/skills
+npx skills@latest add -y mattpocock/skills -g
